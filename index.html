@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realmc - Best Minecraft Server</title>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #0f0f23, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ff88, #00bfff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00ff88;
+            text-shadow: 0 0 10px #00ff88;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, #00ff88, #00bfff);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Page Content */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 120px 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Home Page */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .server-ip {
+            background: linear-gradient(45deg, rgba(0, 255, 136, 0.2), rgba(0, 191, 255, 0.2));
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 20px 40px rgba(0, 255, 136, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 30px 60px rgba(0, 255, 136, 0.5); }
+        }
+
+        .ip-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ff88, #00bfff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+        }
+
+        .player-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.4);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00ff88, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #00ff88;
+            margin-bottom: 0.5rem;
+        }
+
+        .chat-container {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .chat-message {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 15px;
+            border-left: 4px solid #00ff88;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Page 1 - Server Details */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .detail-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 191, 255, 0.4);
+        }
+
+        .detail-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            color: #00bfff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: -1.5rem;
+            top: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(45deg, #00ff88, #00bfff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-family: 'Orbitron', monospace;
+        }
+
+        /* Page 2 - YouTube */
+        .youtube-section {
+            text-align: center;
+        }
+
+        .youtube-card {
+            background: linear-gradient(135deg, #FF0000, #CC0000);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .youtube-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Page 3 - Shop */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .shop-item {
+            background: rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .shop-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.4);
+            border-color: #FFD700;
+        }
+
+        .price {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #FFD700;
+            margin: 1rem 0;
+            text-shadow: 0 0 20px #FFD700;
+        }
+
+        .qr-placeholder {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #333, #666);
+            border-radius: 15px;
+            margin: 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+            border: 3px dashed #FFD700;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(45deg, #00ff88, #00bfff);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.6);
+        }
+
+        .btn-copy {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            margin-left: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .ip-text {
+                font-size: 1.8rem;
+            }
+            
+            .player-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Particles */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🌟 REALMC 🌟</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage(0)">Home</a></li>
+                <li><a href="#" onclick="showPage(1)">Server Details</a></li>
+                <li><a href="#" onclick="showPage(2)">YouTube</a></li>
+                <li><a href="#" onclick="showPage(3)">Shop</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page 0: Home -->
+    <div id="page0" class="page active">
+        <div class="hero-section">
+            <h1 style="font-family: 'Orbitron', monospace; font-size: 4rem; background: linear-gradient(45deg, #00ff88, #00bfff, #ff00ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 2rem;">
+                Welcome to Realmc!
+            </h1>
+            
+            <div class="server-ip">
+                <div class="ip-text" id="serverIP">shiny.frezio.cloud:19200</div>
+                <button class="btn" onclick="copyIP()">📋 Copy IP</button>
+                <button class="btn btn-copy" onclick="window.open('minecraft://shiny.frezio.cloud:19200')">🚀 Direct Connect</button>
+            </div>
+
+            <div class="player-stats">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-number" id="playersOnline">12</div>
+                    <div>Players Online</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-gamepad"></i></div>
+                    <div class="stat-number">1.20.1</div>
+                    <div>Server Version</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-globe"></i></div>
+                    <div class="stat-number">Java & Bedrock</div>
+                    <div>Crossplay</div>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <h3 style="color: #00ff88; margin-bottom: 1rem;">💬 Live Player Chat</h3>
+                <div id="chatMessages">
+                    <div class="chat-message"><strong>Player1:</strong> Yo what's up everyone!</div>
+                    <div class="chat-message"><strong>Player2:</strong> This server is awesome!</div>
+                    <div class="chat-message"><strong>Player3:</strong> Building epic base rn 🔥</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 1: Server Details -->
+    <div id="page1" class="page">
+        <h1 style="font-family: 'Orbitron', monospace; font-size: 3.5rem; text-align: center; background: linear-gradient(45deg, #00bfff, #00ff88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 3rem;">
+            Server Details
+        </h1>
+
+        <div class="details-grid">
+            <div class="detail-card">
+                <h2 class="detail-title">🌐 Server IP & Port</h2>
+                <div style="font-size: 1.5rem; color: #00ff88; text-align: center; margin: 1rem 0;">
+                    <strong>Java:</strong> shiny.frezio.cloud:19200
+                </div>
+                <div style="font-size: 1.2rem; color: #00bfff; text-align: center;">
+                    <strong>Bedrock:</strong> shiny.frezio.cloud:19200
+                </div>
+                <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="copyIP()">Copy IP</button>
+            </div>
+
+            <div class="detail-card">
+                <h2 class="detail-title">🎮 How to Join (Java)</h2>
+                <ol class="steps">
+                    <li>🔥 First open Minecraft</li>
+                   
