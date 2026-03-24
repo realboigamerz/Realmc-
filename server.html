@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMP Season 1 - Server Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .server-info {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .ip-port {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .steps {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        .step {
+            background: white;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .step-number {
+            background: #3498db;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.1em;
+        }
+        .smp-info {
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 20px;
+            padding: 20px;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            border-radius: 15px;
+        }
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+        .copy-btn:hover {
+            background: #2ecc71;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39,174,96,0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 SMP SEASON 1</h1>
+        
+        <div class="server-info">
+            <h2>🚀 SERVER DETAILS</h2>
+            <div class="ip-port">
+                IP: <strong>shiny.frezio.cloud</strong><br>
+                PORT: <strong>19200</strong>
+                <button class="copy-btn" onclick="copyIP()">📋 Copy IP</button>
+            </div>
+        </div>
+
+        <div class="steps">
+            <h3 style="color: #2c3e50; margin-bottom: 20px;">📋 HOW TO JOIN (Java Edition)</h3>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>FIRST: Open Minecraft</strong>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Click MULTIPLAYER</strong> option
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Click ADD SERVER</strong>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>COPY IP FROM ABOVE → PASTE → DONE! ✅</strong>
+            </div>
+        </div>
+
+        <div class="smp-info">
+            🎯 SURVIVAL SMP SEASON 1 🎯
+        </div>
+    </div>
+
+    <script>
+        function copyIP() {
+            const ip = "shiny.frezio.cloud:19200";
+            navigator.clipboard.writeText(ip).then(() => {
+                alert("✅ IP copied to clipboard!\nshiny.frezio.cloud:19200");
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement("textarea");
+                textArea.value = ip;
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert("✅ IP copied to clipboard!\nshiny.frezio.cloud:19200");
+            });
+        }
+    </script>
+</body>
+</html>
