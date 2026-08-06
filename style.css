@@ -1,0 +1,100 @@
+/* =========================================================
+   RealMC Network — Black + Orange premium glassmorphism
+   ========================================================= */
+:root{
+  --bg:#070707;
+  --bg-2:#0d0b09;
+  --ink:#f6f1ea;
+  --muted:#9b948c;
+  --orange:#ff7a18;
+  --orange-2:#ffb347;
+  --orange-deep:#c94f00;
+  --glass:rgba(255,255,255,.045);
+  --glass-brd:rgba(255,255,255,.10);
+  --glow:0 0 0 1px rgba(255,122,24,.25), 0 18px 60px -18px rgba(255,122,24,.65);
+  --radius:18px;
+  --mc:'Press Start 2P', monospace;
+  --sans:'Outfit', system-ui, sans-serif;
+  --brand:#ff7a18; --brand2:#ffb547; --brand3:#ff3d00;
+  --ink:#07070a; --panel:rgba(255,255,255,.045); --line:rgba(255,255,255,.09);
+  --glow:0 0 40px rgba(255,122,24,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--ink);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{background:var(--ink);overflow-x:hidden}
+::selection{background:var(--brand);color:#000}
+
+/* scrollbar */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:#0a0a0e}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--brand),var(--brand3));border-radius:99px;border:2px solid #0a0a0e}
+::-webkit-scrollbar-thumb:hover{background:var(--brand2)}
+
+/* ---------- loader ---------- */
+#loader{position:fixed;inset:0;z-index:200;background:#050507;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s}
+#loader.done{opacity:0;visibility:hidden}
+.cube{width:64px;height:64px;position:relative;transform-style:preserve-3d;animation:spin 4s linear infinite}
+.cube span{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,122,24,.85),rgba(255,61,0,.55));border:1px solid rgba(255,181,71,.7);box-shadow:inset 0 0 24px rgba(255,180,80,.35)}
+.cube span:nth-child(1){transform:translateZ(32px)}
+.cube span:nth-child(2){transform:rotateY(180deg) translateZ(32px)}
+.cube span:nth-child(3){transform:rotateY(90deg) translateZ(32px)}
+.cube span:nth-child(4){transform:rotateY(-90deg) translateZ(32px)}
+.cube span:nth-child(5){transform:rotateX(90deg) translateZ(32px)}
+.cube span:nth-child(6){transform:rotateX(-90deg) translateZ(32px)}
+@keyframes spin{to{transform:rotateX(360deg) rotateY(360deg)}}
+.loadbar{width:220px;height:4px;border-radius:99px;background:rgba(255,255,255,.08);margin-top:22px;overflow:hidden}
+.loadbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand3),var(--brand2));transition:width .25s}
+
+/* ---------- background ---------- */
+.bg-layer{position:fixed;inset:0;z-index:-1;overflow:hidden;background:
+  radial-gradient(900px 600px at 80% -10%,rgba(255,122,24,.16),transparent 60%),
+  radial-gradient(800px 500px at 5% 20%,rgba(255,61,0,.10),transparent 60%),#07070a}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+.orb1{width:420px;height:420px;background:#ff7a18;top:-90px;left:-90px;animation:drift 18s ease-in-out infinite}
+.orb2{width:480px;height:480px;background:#ff3d00;bottom:5%;right:-140px;animation:drift 24s ease-in-out infinite reverse}
+.orb3{width:340px;height:340px;background:#ffb547;top:45%;left:45%;opacity:.22;animation:drift 30s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,-60px) scale(1.15)}}
+.grid-floor{position:absolute;inset:auto 0 0 0;height:46vh;background-image:
+  linear-gradient(rgba(255,122,24,.16) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,122,24,.16) 1px,transparent 1px);
+  background-size:56px 56px;transform:perspective(420px) rotateX(64deg);transform-origin:bottom;
+  mask-image:linear-gradient(to top,#000,transparent);-webkit-mask-image:linear-gradient(to top,#000,transparent);opacity:.5}
+#particles{position:absolute;inset:0;width:100%;height:100%}
+
+/* ---------- primitives ---------- */
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid var(--line);backdrop-filter:blur(18px);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.nav-glass{background:rgba(10,10,14,.6);border:1px solid var(--line);backdrop-filter:blur(20px);box-shadow:0 12px 40px rgba(0,0,0,.45)}
+#nav.scrolled .nav-glass{background:rgba(7,7,10,.9);box-shadow:0 12px 40px rgba(0,0,0,.7)}
+.gradient-border{position:relative}
+.gradient-border::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;
+  background:linear-gradient(120deg,rgba(255,122,24,.9),rgba(255,181,71,.15),rgba(255,61,0,.8));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:.7;animation:borderpulse 4s ease-in-out infinite;pointer-events:none}
+@keyframes borderpulse{0%,100%{opacity:.35}50%{opacity:.9}}
+
+.grad-text{background:linear-gradient(100deg,#ff9a3c,#ffd08a 45%,#ff3d00);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(255,122,24,.35))}
+
+.navlink{padding:.5rem .75rem;border-radius:.7rem;color:rgba(255,255,255,.65);transition:.25s;position:relative}
+.navlink:hover,.navlink.active{color:#fff;background:rgba(255,122,24,.13);box-shadow:inset 0 0 0 1px rgba(255,122,24,.28)}
+.mlink{padding:.7rem .8rem;border-radius:.7rem;background:rgba(255,255,255,.04);color:rgba(255,255,255,.75)}
+.mlink:hover{background:rgba(255,122,24,.16);color:#fff}
+
+.btn-glow{display:inline-flex;align-items:center;gap:.55rem;padding:.65rem 1.15rem;border-radius:.9rem;font-weight:600;font-size:.9rem;color:#12080a;
+  background:linear-gradient(100deg,var(--brand2),var(--brand) 55%,var(--brand3));box-shadow:0 8px 26px rgba(255,105,20,.35);transition:.25s;border:0;cursor:pointer}
+.btn-glow:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(255,122,24,.55)}
+.btn-glow:active{transform:translateY(0)}
+.btn-ghost{display:inline-flex;align-items:center;gap:.55rem;padding:.65rem 1.15rem;border-radius:.9rem;font-weight:600;font-size:.9rem;color:#fff;
+  background:rgba(255,255,255,.05);border:1px solid var(--line);transition:.25s;cursor:pointer}
+.btn-ghost:hover{background:rgba(255,122,24,.14);border-color:rgba(255,122,24,.45);transform:translateY(-2px)}
+
+.logo-cube{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:#180b04;
+  background:linear-gradient(135deg,var(--brand2),var(--brand3));box-shadow:var(--glow)}
+.dot-live{width:9px;height:9px;border-radius:50%;background:#33d17a;box-shadow:0 0 0 0 rgba(51,209,122,.6);animation:pulse 1.8s infinite;display:inline-block}
